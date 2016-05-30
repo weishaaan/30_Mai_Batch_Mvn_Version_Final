@@ -1,0 +1,19 @@
+<CATALOG>
+    <BATCH>
+        <CODE>07J</CODE>
+        <NAME>Batch num 7 - extraction 7</NAME>
+        <DESCRIPTION>USA</DESCRIPTION>
+        <OUTPUT>Fichier xls</OUTPUT>
+        <INPUT>input 1</INPUT>
+    </BATCH>
+
+    <BATCH>
+        <CODE>08M</CODE>
+        <NAME>Batch num 8 - extraction 8</NAME>
+        <DESCRIPTION>USA</DESCRIPTION>
+        <OUTPUT>Fichier xls</OUTPUT>
+        <INPUT>input 2</INPUT>
+    </BATCH>
+
+
+</CATALOG>
