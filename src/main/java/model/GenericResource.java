@@ -94,31 +94,23 @@ public class GenericResource {
     public List<Message> getAllMessage() throws IOException{
         return messageService.getAllMessagges();
     }
-
-    /***************************TEXT PLAIN**************************************/
-    @GET
-    @Path("batch")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String doGetBat(){            
-        //r.createProperties();        
-        String filepath = r.readProperties();
-        //System.out.println(filepath);
-        String result = r.runBatFile(filepath);                        
-	return result + " ! it works!!! ";      
-   }
     
+    @OPTIONS
+    public Response getOptions() {
+      return Response.ok()
+        .header("Access-Control-Allow-Origin", "*")
+        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+        .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+    }
+    /***************************TEXT PLAIN**************************************/
     @POST
-    @Path("a")
+    @Path("code")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response create(String a){
-        System.out.println("time = " + a);
-        //System.out.println("message = " + input.getMessage());
+    @Produces(MediaType.APPLICATION_JSON)
+    public Batch postBatchByCode(@PathParam("code") String code) throws XmlException, IOException{
+        System.out.println("input code of Batch file is " + code);
         
-        String var = "26 mai,5:53pm"+a;      
-        return Response.ok().entity(var)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .allow("OPTIONS").build();
+        return batchService.getBatch(code);
     }  
     
     /*************************** JSON **************************************/
@@ -143,14 +135,29 @@ public class GenericResource {
         return batchService.getAllBatches();
     }
     
-    @OPTIONS
-    public Response getOptions() {
-      return Response.ok()
-        .header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-        .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-  }
-
+    @GET
+    @Path("Batch")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String doGetBat(){            
+        //r.createProperties();        
+        String filepath = r.readProperties();
+        //System.out.println(filepath);
+        String result = r.runBatFile(filepath);                        
+	return result + " ! it works!!! ";      
+   }
+    @POST
+    @Path("runBatch")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String runBat(Batch2 batch2){            
+        //r.createProperties();     
+        System.out.println("input code of Batch file is " + batch2.code);
+        
+        String filepath = r.readProperties();
+        //System.out.println(filepath);
+        String result = r.runBatFile(filepath);                        
+	return "batch code is "+batch2.code +",result is : "+result + " ! it works!!! ";      
+   }
 }
     
     

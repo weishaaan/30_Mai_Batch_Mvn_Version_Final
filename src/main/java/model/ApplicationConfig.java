@@ -22,7 +22,6 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(model.CORSFilter.class);
         resources.add(model.GenericResource.class);
-        resources.add(model.hello.class);
     }
     
 }
