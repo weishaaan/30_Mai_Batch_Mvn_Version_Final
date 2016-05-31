@@ -16,7 +16,7 @@ public class BatchService {
     private Map<Long,Batch> catalogue = BatchDatabase.getBatches();
     
     public BatchService() throws XmlException, IOException{
-        String filename = "src/main/java/Resource/batch_catalogue.xml";
+        String filename = "batch_catalogue.xml";
         File xmlFile = new File(filename);
         CATALOGDocument doc = CATALOGDocument.Factory.parse(xmlFile);
         BatchType[] batches = doc.getCATALOG().getBATCHArray();
