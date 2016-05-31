@@ -149,17 +149,16 @@ public class GenericResource {
     @POST
     @Path("runBatch")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Batch runBat(Batch batch) throws XmlException, IOException{            
+    @Produces(MediaType.TEXT_PLAIN)
+    public String runBat(Batch batch) throws XmlException, IOException{            
         //r.createProperties();     
         System.out.println("input code of Batch file is " + batch.code);
         Batch bbatch = batchService.getBatch("08M");
         
-        //String filepath = r.readProperties();
+        String filepath = r.readProperties();
         //System.out.println(filepath);
-        //String result = r.runBatFile(filepath);    ", result is : "+result ; 
-        String result="11:01pm";
-	return bbatch;       
+        String result = r.runBatFile(filepath);
+	return    "run batch, then get the result is : "+result;       
    }
     
     
