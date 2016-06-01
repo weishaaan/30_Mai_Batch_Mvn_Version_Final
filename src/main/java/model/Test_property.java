@@ -20,9 +20,10 @@ public class Test_property {
             r.runBatFile(filepath);
             */
         }
-        public String readProperties(){
+        public String readProperties(String property){
             Properties prop = new Properties();
-            try (InputStream in = new FileInputStream("bat.properties")) 
+            String path = null;
+            try (InputStream in = new FileInputStream("src/main/resources/bat.properties")) 
             {
 		prop.load(in);
             }
@@ -32,7 +33,13 @@ public class Test_property {
             catch (Exception e) {
 		e.printStackTrace();
 	    }
-            String path = prop.getProperty("text.bat");
+            if(property.equals("text")){
+                path = prop.getProperty("text.bat");
+            }
+            else if(property.equals("xml")){
+                path = prop.getProperty("xml.bat");
+                }
+            
             return path;
         }
 

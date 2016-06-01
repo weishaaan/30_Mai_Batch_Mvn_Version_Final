@@ -30,6 +30,7 @@ import static javax.ws.rs.client.Entity.json;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
+import javax.xml.bind.JAXBException;
 import org.apache.xmlbeans.XmlException;
 import org.eclipse.jetty.server.Request;
 import static org.glassfish.jersey.server.model.Parameter.Source.PATH;
@@ -40,9 +41,10 @@ public class GenericResource {
     BatchService batchService;
     Test_property r = new Test_property();  
 
-    public GenericResource() throws XmlException, IOException {
+    public GenericResource() throws JAXBException, IOException, XmlException {
         this.batchService = new BatchService();
     }
+
     
     /*
     
@@ -115,7 +117,7 @@ public class GenericResource {
     
     /*************************** JSON **************************************/
     @GET
-    @Path("{code}")
+    @Path("getOneBatch/{code}")
     @Produces(MediaType.APPLICATION_JSON)
     public Batch getBatchByCode(@PathParam("code") String code)throws IOException, XmlException{
         return batchService.getBatch(code);
@@ -129,7 +131,7 @@ public class GenericResource {
     }
     
     @GET
-    @Path("getBatch")
+    @Path("getAllBatch")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Batch> getAllBatch() throws IOException{
         return batchService.getAllBatches();
@@ -140,7 +142,7 @@ public class GenericResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String doGetBat(){            
         //r.createProperties();        
-        String filepath = r.readProperties();
+        String filepath = r.readProperties("test");
         //System.out.println(filepath);
         String result = r.runBatFile(filepath);                        
 	return result + " ! it works!!! ";      
@@ -155,7 +157,7 @@ public class GenericResource {
         System.out.println("input code of Batch file is " + batch.code);
         Batch bbatch = batchService.getBatch("08M");
         
-        String filepath = r.readProperties();
+        String filepath = r.readProperties("text");
         //System.out.println(filepath);
         String result = r.runBatFile(filepath);
 	return    "run batch, then get the result is : "+result;       
