@@ -8,30 +8,27 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>model.ApplicationConfig</param-value>
         </init-param>
+
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+            <param-value>model.CORSFilter</param-value>
+        </init-param>
+    
+        <init-param>
+            <param-name>com.sun.jersey.config.provider.packages</param-name>
+            <param-value>model</param-value>
+        </init-param>
+
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>ServletAdaptor</servlet-name>
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
-    
-    
-    <servlet>
-    <servlet-name>Jersey Web Application</servlet-name>
-    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 
-    <init-param>
-        <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-        <param-value>model.CORSFilter</param-value>
-    </init-param>
     
-    <init-param>
-        <param-name>com.sun.jersey.config.property.packages</param-name>
-        <param-value>model</param-value>
-    </init-param>
-
-    <load-on-startup>1</load-on-startup>
-</servlet>
+   
     
        
 </web-app>

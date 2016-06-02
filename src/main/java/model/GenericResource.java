@@ -37,7 +37,7 @@ import static org.glassfish.jersey.server.model.Parameter.Source.PATH;
 
 @Path("home")
 public class GenericResource {
-    MessageService messageService = new MessageService();
+    
     BatchService batchService;
     Test_property r = new Test_property();  
 
@@ -80,22 +80,7 @@ public class GenericResource {
     public Message delectMessage(@PathParam("messageId") long messageId){
         return messageService.removeMessage(messageId);
     }
-    */
-    @POST
-    @Path("postMessage")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public List<Message> postMessage(Message message) throws IOException{
-        messageService.addMessage(message);
-        return messageService.getAllMessagges();
-    }
-
-    @GET
-    @Path("getMessage")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Message> getAllMessage() throws IOException{
-        return messageService.getAllMessagges();
-    }
+  
     
     @OPTIONS
     public Response getOptions() {
