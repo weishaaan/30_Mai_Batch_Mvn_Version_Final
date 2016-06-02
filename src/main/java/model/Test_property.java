@@ -44,9 +44,11 @@ public class Test_property {
         }
 
         public void createProperties(){
-            try (OutputStream out = new FileOutputStream("baaaaat.properties")) {
+            try (OutputStream out = new FileOutputStream("created_bat.properties")) {
+                //file will be created in the root dictionary
 		Properties properties = new Properties();
-		properties.setProperty("text.bat", "C:\\Users\\stagiaire\\Documents\\NetBeansProjects\\test_property\\src\\test_property\\text.bat");
+                //create variabls in .properties file
+		properties.setProperty("text.bat", "src\\main\\resources\\text.bat");
 		properties.store(out, "This is a sample for java properties");
             } catch (IOException e) {
 		e.printStackTrace();
